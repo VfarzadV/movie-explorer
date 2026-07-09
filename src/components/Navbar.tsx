@@ -10,10 +10,10 @@ export default function Navbar() {
       <ul className="flex gap-6 bg-[#0F0F0F] px-6 py-3 rounded-lg border-2 border-[#1F1F1F] text-white ml-[10%] justify-center">
         <Link to="/" className=" px-3 py-2 bg-[#1F1F1F] rounded-lg border border-[#1F1F1F] cursor-pointer hover:text-red-500">Home</Link>
         <Link to="/genre" className="px-3 py-2 cursor-pointer hover:text-red-500">Genre</Link>
-        <Link to="/movies" className="px-3 py-2 cursor-pointer hover:text-red-500">Movies</Link>
+        <Link to="/MoviesPage" className="px-3 py-2 cursor-pointer hover:text-red-500">Movies</Link>
         <Link to="/tv-shows" className="px-3 py-2 cursor-pointer hover:text-red-500">Tv Shows</Link>
         <Link to="/anime" className="px-3 py-2 cursor-pointer hover:text-red-500">Anime</Link>
-        <Link to="/subscription" className="px-3 py-2 cursor-pointer hover:text-red-500">Subscription</Link>
+        <Link to="/Subscriptions" className="px-3 py-2 cursor-pointer hover:text-red-500">Subscription</Link>
       </ul>
 
       <div className="flex items-center gap-4  justify-end">

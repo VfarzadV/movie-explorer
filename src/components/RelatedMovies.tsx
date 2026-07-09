@@ -40,10 +40,10 @@ const topMoviesData: MovieType[] = [
         description: "Eddie Brock attempts to reignite his career by interviewing serial killer Cletus Kasady, who becomes the host of the symbiote Carnage."
     }
 ];
-export default function TopRatedMovies() {
+export default function RelatedMovies() {
     return (
         <div className="flex flex-col  py-20 w-[85%] mx-auto ">
-            <HomeSectionTitle title="Top Rated Movies" icon="/public/star.svg" />
+            <HomeSectionTitle title="Related Movies" icon="/video-horizontal.svg" />
             <MoviesBox movies={topMoviesData} />
         </div>
     )

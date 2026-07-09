@@ -1,23 +1,44 @@
+import { Link } from "react-router-dom";
 const footerLinks = [
     {
         title: "Home",
-        links: ["Categories", "Devices", "Pricing", "FAQ"]
+        links: [
+            { name: "Categories", path: "/" },
+            { name: "Devices", path: "/" },
+            { name: "Pricing", path: "/" },
+            { name: "FAQ", path: "/" }
+        ]
     },
     {
         title: "Movies",
-        links: ["Genres", "Trending", "New Release", "Popular"]
+        links: [
+            { name: "Genres", path: "/movies" },
+            { name: "Trending", path: "/movies" },
+            { name: "New Release", path: "/movies" },
+            { name: "Popular", path: "/movies" }
+        ]
     },
     {
         title: "Shows",
-        links: ["Genres", "Trending", "New Release", "Popular"]
+        links: [
+            { name: "Genres", path: "/shows" },
+            { name: "Trending", path: "/shows" },
+            { name: "New Release", path: "/shows" },
+            { name: "Popular", path: "/shows" }
+        ]
     },
     {
         title: "Support",
-        links: ["Contact Us"]
+        links: [
+            { name: "Contact Us", path: "/Support" }
+        ]
     },
     {
         title: "Subscription",
-        links: ["Plans", "Features"]
+        links: [
+            { name: "Plans", path: "/subscriptions" },
+            { name: "Features", path: "/subscriptions" }
+        ]
     }
 ];
 
@@ -34,16 +55,17 @@ export default function Footer() {
                                 {column.title}
                             </h3>
                             <ul className="flex flex-col gap-3">
-                                {column.links.map((link, idx) => (
+                                {column.links.map((linkItem, idx) => (
                                     <li key={idx}>
-                                        <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                                            {link}
-                                        </a>
+                                        <Link to={linkItem.path} className="text-gray-400 hover:text-white transition-colors text-sm">
+                                            {linkItem.name}
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                     ))}
+                    
                     <div className="flex flex-col gap-4">
                         <h3 className="text-white font-medium text-lg mb-2">
                             Connect With Us
@@ -59,16 +81,25 @@ export default function Footer() {
                     </div>
                     
                 </div>
+                
                 <div className="w-full h-px bg-gray-800 mb-8"></div>
+                
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
                     <p>@2024, All Rights Reserved</p>
                     
                     <div className="flex items-center gap-6">
-                        <a href="#" className="hover:text-white transition-colors">Terms of Use</a>
-                        <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+                        <Link to="/terms" className="hover:text-white transition-colors">
+                            Terms of Use
+                        </Link>
+                        <Link to="/privacy" className="hover:text-white transition-colors">
+                            Privacy Policy
+                        </Link>
+                        <Link to="/cookies" className="hover:text-white transition-colors">
+                            Cookie Policy
+                        </Link>
                     </div>
                 </div>
+                
             </div>
         </footer>
     );
