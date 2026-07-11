@@ -4,11 +4,11 @@ import type { MovieType, TMDBMovie } from "../types";
 import { useEffect, useState } from "react";
 import { apiEndpoints, IMAGE_BASE_URL } from "../services/tmdb";
 
-export default function TopRatedMovies() {
+export default function Trending() {
     const [movies, setMovies] = useState<MovieType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        fetch(apiEndpoints.topRated)
+        fetch(apiEndpoints.trending)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("ارتباط با سرور برقرار نشد!");
@@ -39,7 +39,7 @@ export default function TopRatedMovies() {
 
     return (
         <div className="flex flex-col  py-20 w-[85%] mx-auto ">
-            <HomeSectionTitle title="Top Rated Movies" icon="/public/star.svg" />
+            <HomeSectionTitle title="Trending Movies" icon="/public/star.svg" />
             {isLoading ? (
                 <div className="flex justify-center items-center h-64 text-red-500 text-xl font-medium animate-pulse">
                     Loading blockbuster movies...

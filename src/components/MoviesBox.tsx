@@ -7,7 +7,7 @@ interface MoviesBoxProps {
 export default function MoviesBox({ movies = [] }: MoviesBoxProps) {
     return (
         <div className="py-8 w-full mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-6">
                 {movies.map((movie) => (
                     <div
                         key={movie.id}

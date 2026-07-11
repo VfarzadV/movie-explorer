@@ -1,6 +1,7 @@
 import HomeHeader from '../components/HomeHeader';
 import Genres from "../components/Genres"
 import TopRatedMovies from "../components/TopRatedMovies"
+import Trending from "../components/Trending"
 import Suggest from "../components/Suggest"
 import Membership from "../components/Membership"
 import Footer from "../components/Footer"
@@ -11,8 +12,9 @@ export default function Home() {
 
       <HomeHeader />
       <Genres />
-      <TopRatedMovies />
+      <Trending />
       <Suggest />
+      <TopRatedMovies />
       <Membership />
       <Footer />
     </div>
