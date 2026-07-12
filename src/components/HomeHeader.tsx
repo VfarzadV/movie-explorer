@@ -30,7 +30,7 @@ export default function HomeHeader() {
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [trendingMovies.length]); 
+  }, [trendingMovies.length]);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % trendingMovies.length);
@@ -41,10 +41,10 @@ export default function HomeHeader() {
   };
 
   const currentMovie = trendingMovies[currentIndex];
-  
+
   const prevIndex = (currentIndex - 1 + trendingMovies.length) % trendingMovies.length;
   const nextIndex = (currentIndex + 1) % trendingMovies.length;
-  
+
   const prevMovie = trendingMovies[prevIndex];
   const nextMovie = trendingMovies[nextIndex];
 
@@ -65,12 +65,13 @@ export default function HomeHeader() {
         {/* تغییرات در این بخش اعمال شد */}
         {currentMovie && (
           <HomeHeaderTitle
+            id={currentMovie.id}
             title={currentMovie.title}
             overview={currentMovie.overview}
-            onNext={handleNext} 
+            onNext={handleNext}
             onPrev={handlePrev}
             prevImage={prevMovie?.poster_path ? `${IMAGE_BASE_URL}${prevMovie.poster_path}` : null}
-            nextImage={nextMovie?.poster_path ? `${IMAGE_BASE_URL}${nextMovie.poster_path}` : null}/>
+            nextImage={nextMovie?.poster_path ? `${IMAGE_BASE_URL}${nextMovie.poster_path}` : null} />
         )}
       </div>
     </div>

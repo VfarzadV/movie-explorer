@@ -1,6 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon, PlusIcon, PlayIcon } from "@heroicons/react/24/outline";
 import type { HomeHeaderTitleProps } from "../types";
-export default function HomeHeaderTitle({ title, overview, onNext, onPrev, prevImage, nextImage }: HomeHeaderTitleProps) {
+import { Link } from "react-router-dom";
+export default function HomeHeaderTitle({id, title, overview, onNext, onPrev, prevImage, nextImage }: HomeHeaderTitleProps) {
     return (
         <div className=' w-[85%] flex justify-center items-center mt-130 mx-auto text-white gap-6'>
             <button onClick={onPrev} className="focus:outline-none shrink-0 z-20">
@@ -20,9 +21,9 @@ export default function HomeHeaderTitle({ title, overview, onNext, onPrev, prevI
                     {overview}
                 </p>
                 <div className='flex items-center justify-center mx-auto gap-3 mt-8'>
-                    <button type='button' className='bg-[#BB0000] rounded-full flex align-middle items-center justify-center py-3.5 px-5 gap-1 text-center shadow-lg shadow-black/40 hover:shadow-black/70 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer'>
+                    <Link to={`/movie/${id}`} className='bg-[#BB0000] rounded-full flex align-middle items-center justify-center py-3.5 px-5 gap-1 text-center shadow-lg shadow-black/40 hover:shadow-black/70 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer'>
                         <PlayIcon className='w-7 h-7' /> Watch Now
-                    </button>
+                    </Link>
                     <button type="button" className='bg-[#1A1A1A] rounded-full flex align-middle items-center py-3.5 px-5 gap-1.5 text-center shadow-lg shadow-red-600/30 hover:shadow-red-600/60 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer'>
                         <PlusIcon className='w-7 h-7' /> WatchList
                     </button>

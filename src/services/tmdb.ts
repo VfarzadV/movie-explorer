@@ -10,4 +10,5 @@ export const apiEndpoints = {
     trending: `${BASE_URL}/trending/movie/week?api_key=${API_KEY}&language=en-US`,
     popular: (page: number) => `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`,
     search: (query: string, page: number) => `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=${page}`,
+    movieDetails: (id: string | number) => `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=credits`,
 };

@@ -12,8 +12,8 @@ const routes = [
   { path: "/Register", element: <Register /> },
   { path: "/Support", element: <Support /> },
   { path: "/Subscriptions", element: <Subscriptions /> },
-  { path: "/MovieDetail", element: <MovieDetail /> },
   { path: "/MoviesPage", element: <MoviesPage /> },
+  { path: "/movie/:id", element: <MovieDetail /> },
 ];
 
 export default routes;

@@ -1,4 +1,6 @@
 import type { MovieType } from "../types";
+import { Link } from "react-router-dom";
+
 
 interface MoviesBoxProps {
     movies: MovieType[];
@@ -9,7 +11,9 @@ export default function MoviesBox({ movies = [] }: MoviesBoxProps) {
         <div className="py-8 w-full mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-6">
                 {movies.map((movie) => (
-                    <div
+                    <Link
+                        to={`/movie/${movie.id}`}
+
                         key={movie.id}
                         className="group cursor-pointer flex flex-col gap-3 p-3 bg-[#111111] border border-[#222222] rounded-2xl shadow-lg shadow-black/50 hover:shadow-black/80 hover:border-gray-600 hover:-translate-y-1 transition-all duration-300"
                     >
@@ -37,7 +41,7 @@ export default function MoviesBox({ movies = [] }: MoviesBoxProps) {
                                 {movie.description}
                             </p>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

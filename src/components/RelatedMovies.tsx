@@ -38,6 +38,15 @@ const topMoviesData: MovieType[] = [
         rating: "5.9",
         releaseDate: "October 1, 2021",
         description: "Eddie Brock attempts to reignite his career by interviewing serial killer Cletus Kasady, who becomes the host of the symbiote Carnage."
+    },
+    {
+        id: 5,
+        title: "The Crown",
+        image: "/public/The-Crown.jpg",
+        genre: "Drama",
+        rating: "8.6",
+        releaseDate: "November 15, 2020",
+        description: "Follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the twentieth century."
     }
 ];
 export default function RelatedMovies() {

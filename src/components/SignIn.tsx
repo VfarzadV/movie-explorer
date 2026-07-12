@@ -1,21 +1,28 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useAuth } from "../context/AuthContext"; 
 
 export default function SignIn() {
     const navigate = useNavigate();
+    const { login } = useAuth(); 
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    
-
     const userLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (username.trim().length >= 5 && password.trim().length >= 8) {
+            
+            login({
+                name: username,
+                email: `${username}@example.com`,
+                password: password
+            });
+
             await Swal.fire({
-                title: "WellCome!",
-                text: `${username} WellCome to our site. enjoy!!!`,
+                title: "Welcome!",
+                text: `${username} Welcome to our site. enjoy!!!`,
                 icon: "success",
                 confirmButtonText: "go to site",
                 confirmButtonColor: "#CC0000", 
@@ -27,6 +34,7 @@ export default function SignIn() {
             navigate("/");
         }
     };
+
     return (
         <div className="min-h-screen flex items-center justify-center p-4">
             <div className="flex flex-col md:flex-row w-full max-w-5xl bg-[#0A0A0A] border border-[#222222] rounded-2xl overflow-hidden shadow-2xl">
