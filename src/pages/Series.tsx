@@ -4,17 +4,17 @@ import Pagination from "rc-pagination";
 import MoviesBox from "../components/MoviesBox";
 import Navbar from '../components/Navbar';
 import Footer from "../components/Footer";
-import type { MovieType, TMDBMovie } from "../types";
+import type { MovieType, TMDBShow } from "../types";
 import { apiEndpoints, IMAGE_BASE_URL } from "../services/tmdb";
 
-export default function MoviesPage() {
+export default function Series() {
     const [searchQuery, setSearchQuery] = useState("");
-    const [movies, setMovies] = useState<MovieType[]>([]);
+    const [shows, setShows] = useState<MovieType[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    const fetchMovies = (url: string) => {
+    const fetchShows = (url: string) => {
         setIsLoading(true);
         fetch(url)
             .then((res) => {
@@ -23,17 +23,18 @@ export default function MoviesPage() {
             })
             .then((data) => {
                 setTotalPages(data.total_pages > 500 ? 500 : data.total_pages);
-                const formattedMovies: MovieType[] = data.results.map((movie: TMDBMovie) => ({
-                    id: movie.id,
-                    title: movie.title,
-                    image: movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : "",
-                    genre: "Action",
-                    genre_ids: movie.genre_ids,
-                    rating: movie.vote_average.toFixed(1),
-                    releaseDate: movie.release_date || "Unknown",
-                    description: movie.overview || "No description available.",
+                
+                const formattedShows: MovieType[] = data.results.map((show: TMDBShow) => ({
+                    id: show.id,
+                    title: show.name, 
+                    image: show.poster_path ? `${IMAGE_BASE_URL}${show.poster_path}` : "",
+                    genre: "TV Show", 
+                    genre_ids: show.genre_ids,
+                    rating: show.vote_average?.toFixed(1) || "N/A",
+                    releaseDate: show.first_air_date || "Unknown", 
+                    description: show.overview || "No description available.",
                 }));
-                setMovies(formattedMovies);
+                setShows(formattedShows);
             })
             .catch((err) => console.error(err))
             .finally(() => setIsLoading(false));
@@ -42,9 +43,9 @@ export default function MoviesPage() {
     useEffect(() => {
         const timer = setTimeout(() => {
             if (searchQuery.trim() === "") {
-                fetchMovies(apiEndpoints.popular(currentPage));
+                fetchShows(apiEndpoints.popularSeries(currentPage));
             } else {
-                fetchMovies(apiEndpoints.search(searchQuery, currentPage));
+                fetchShows(apiEndpoints.searchSeries(searchQuery, currentPage));
             }
         }, 500);
 
@@ -53,7 +54,7 @@ export default function MoviesPage() {
 
     const handleSearchChange = (text: string) => {
         setSearchQuery(text);
-        setCurrentPage(1);
+        setCurrentPage(1); 
     };
 
     const handlePageChange = (page: number) => {
@@ -95,20 +96,18 @@ export default function MoviesPage() {
     return (
         <div className="font-martel bg-linear-to-b from-[#191919] to-[#0A0A0A] min-h-screen flex flex-col">
             <Navbar />
-
             <div className="w-[85%] mx-auto flex flex-col items-center mt-20 flex-1">
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">
-                    Your Gateway to Movie <span className="text-[#CC0000]">Magic</span>
+                    Binge-Worthy <span className="text-[#CC0000]">TV Shows</span>
                 </h1>
                 <p className="text-gray-400 text-sm md:text-base text-center max-w-2xl mb-10 leading-relaxed">
-                    Dive into the world of cinema with MovieWatch, where you can search and find everything you want to watch.
+                    Explore top-rated series, from gripping dramas to hilarious sitcoms. Find your next obsession here.
                 </p>
-
                 <div className="w-full max-w-3xl mb-12 relative group">
                     <div className="flex items-center w-full bg-[#111111] border border-gray-800 rounded-lg overflow-hidden transition-colors focus-within:border-red-600 shadow-lg">
                         <input
                             type="text"
-                            placeholder="Search movie you want..."
+                            placeholder="Search TV shows..."
                             value={searchQuery}
                             onChange={(e) => handleSearchChange(e.target.value)}
                             className="flex-1 bg-transparent text-white px-6 py-4 focus:outline-none w-full"
@@ -118,21 +117,19 @@ export default function MoviesPage() {
                         </button>
                     </div>
                 </div>
-
                 <div className="w-full">
                     {isLoading ? (
                         <div className="text-center text-red-500 py-20 text-xl animate-pulse">
                             Searching the database...
                         </div>
-                    ) : movies.length > 0 ? (
-                        <MoviesBox movies={movies} />
+                    ) : shows.length > 0 ? (
+                        <MoviesBox movies={shows} mediaType="series" />
                     ) : (
                         <div className="text-center text-gray-500 py-20 text-lg">
-                            No movies found for "{searchQuery}"
+                            No TV shows found for "{searchQuery}"
                         </div>
                     )}
                 </div>
-
                 {!isLoading && totalPages > 1 && (
                     <Pagination
                         current={currentPage}
@@ -144,7 +141,6 @@ export default function MoviesPage() {
                     />
                 )}
             </div>
-
             <Footer />
         </div>
     );

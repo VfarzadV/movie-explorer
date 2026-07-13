@@ -1,16 +1,16 @@
 import Navbar from '../components/Navbar';
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarSolid, PlusIcon, PlayIcon } from "@heroicons/react/24/solid";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { apiEndpoints, BACKDROP_BASE_URL, IMAGE_BASE_URL } from '../services/tmdb';
 import type { MovieDetails, Genre, CastMember } from '../types';
 
 export default function MovieDetailDescription() {
-
     const { id } = useParams();
     const [movie, setMovie] = useState<MovieDetails | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchMovieDetails = () => {
@@ -53,15 +53,15 @@ export default function MovieDetailDescription() {
         ? { backgroundImage: `url('${BACKDROP_BASE_URL}${movie.backdrop_path}')` }
         : { backgroundColor: '#111111' };
     return (
-        <div className="w-full min-h-[600px] pb-10 bg-cover bg-center relative transition-all duration-700" style={backgroundStyle}>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-black/40"></div>
+        <div className="w-full min-h-150 pb-10 bg-cover bg-center relative transition-all duration-700" style={backgroundStyle}>
+            <div className="absolute inset-0 bg-linear-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-black/40"></div>
             <div className="relative z-10">
                 <Navbar />
                 <div className='text-white w-[85%] mx-auto flex flex-col mt-10'>
-                    <Link to="/" className='flex items-center gap-2 w-max group'>
-                        <ChevronLeftIcon className="bg-[#0F0F0F] p-1 rounded-full w-8 h-8 cursor-pointer flex items-center justify-center group-hover:text-red-500 transition-colors" />
-                        <p className='font-medium text-xl group-hover:text-red-500 transition-colors'>Back home</p>
-                    </Link>
+                    <button onClick={() => navigate(-1)} className='flex items-center gap-2 w-max group bg-transparent border-none cursor-pointer'>
+                        <ChevronLeftIcon className="bg-[#0F0F0F] p-1 rounded-full w-8 h-8 flex items-center justify-center group-hover:text-red-500 transition-colors" />
+                        <p className='font-medium text-xl group-hover:text-red-500 transition-colors'>Back</p>
+                    </button>
                 </div>
                 <div className='w-[85%] mx-auto flex flex-col md:flex-row mt-10 text-white items-start md:items-center'>
                     <img
@@ -100,9 +100,9 @@ export default function MovieDetailDescription() {
                             {movie.overview}
                         </p>
                         <div className='flex flex-wrap items-center gap-4 mt-10'>
-                            <button type='button' className='bg-[#CC0000] rounded-full flex align-middle items-center justify-center py-3.5 px-6 gap-2 text-center shadow-lg shadow-red-600/40 hover:shadow-red-600/60 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer font-medium'>
+                            <Link to={`/trailer/movie/${id}`} className='bg-[#CC0000] rounded-full flex align-middle items-center justify-center py-3.5 px-6 gap-2 text-center shadow-lg shadow-red-600/40 hover:shadow-red-600/60 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer font-medium'>
                                 <PlayIcon className='w-6 h-6' /> Watch Now
-                            </button>
+                            </Link>
                             <button type="button" className='bg-[#1A1A1A] border border-gray-700 rounded-full flex align-middle items-center py-3.5 px-6 gap-2 text-center shadow-lg hover:bg-gray-800 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer font-medium'>
                                 <PlusIcon className='w-6 h-6' /> WatchList
                             </button>

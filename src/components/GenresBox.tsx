@@ -1,39 +1,28 @@
-import type { GenreType } from "../types";
+import { Link } from "react-router-dom";
+import { genreMap } from "../services/genres";
 
+const featuredGenreIds = [28, 35, 18, 878];
 
-const genresData: GenreType[] = [
-    { id: 1, title: 'Fantasy', image: '/public/Fantasy.jpg' },
-    { id: 2, title: 'Sitcom', image: '/public/Sitcom.jpg' },
-    { id: 3, title: 'Drama', image: '/public/Drama.jpg' },
-    { id: 4, title: 'Romance', image: '/public/Romance.jpg' },
-];
 export default function GenresBox() {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-
-            {genresData.map((genre) => (
-                <div
-                    key={genre.id}
-                    className="group relative h-28 sm:h-32 rounded-xl overflow-hidden cursor-pointer border border-gray-800 hover:border-gray-500 transition-colors"
-                >
-
-                    <img
-                        src={genre.image}
-                        alt={genre.title}
-                        className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                    />
-
-                    <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300"></div>
-
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <h3 className="text-white text-xl font-medium tracking-wide">
-                            {genre.title}
-                        </h3>
-                    </div>
-
-                </div>
-            ))}
-
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ">
+            {featuredGenreIds.map((id) => {
+                const name = genreMap[id];
+                return (
+                    <Link
+                        key={id}
+                        to={`/genre/${id}`}
+                        className="group relative h-28 sm:h-32 rounded-xl overflow-hidden cursor-pointer border border-gray-800 hover:border-red-600 transition-colors block shadow-lg"
+                    >
+                        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent group-hover:from-red-900/50 transition-colors duration-300"></div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <h3 className="text-white text-xl md:text-2xl font-bold tracking-wide group-hover:scale-110 group-hover:text-red-500 transition-all duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                                {name}
+                            </h3>
+                        </div>
+                    </Link>
+                );
+            })}
         </div>
     )
 }

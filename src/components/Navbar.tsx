@@ -12,7 +12,7 @@ export default function Navbar() {
         <Link to="/" className=" px-3 py-2 bg-[#1F1F1F] rounded-lg border border-[#1F1F1F] cursor-pointer hover:text-red-500">Home</Link>
         <Link to="/genre" className="px-3 py-2 cursor-pointer hover:text-red-500">Genre</Link>
         <Link to="/MoviesPage" className="px-3 py-2 cursor-pointer hover:text-red-500">Movies</Link>
-        <Link to="/tv-shows" className="px-3 py-2 cursor-pointer hover:text-red-500">Tv Shows</Link>
+        <Link to="/series" className="px-3 py-2 cursor-pointer hover:text-red-500">series</Link>
         <Link to="/anime" className="px-3 py-2 cursor-pointer hover:text-red-500">Anime</Link>
         <Link to="/Subscriptions" className="px-3 py-2 cursor-pointer hover:text-red-500">Subscription</Link>
       </ul>

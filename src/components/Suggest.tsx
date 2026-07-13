@@ -62,6 +62,7 @@ export default function Suggest() {
           title: movie.title,
           image: movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : "/placeholder.jpg",
           genre: "Drama",
+          genre_ids: movie.genre_ids,
           rating: movie.vote_average.toFixed(1),
           releaseDate: movie.release_date,
           description: movie.overview,
@@ -81,8 +82,8 @@ export default function Suggest() {
 
   console.log("Data in Suggest component:", suggestedData);
   return (
-    <div className="flex flex-col  py-20 w-[85%] mx-auto ">
-      <HomeSectionTitle title="popular Movies" icon="/public/like.svg" />
+    <div className="flex flex-col  py-10 w-[85%] mx-auto ">
+      <HomeSectionTitle title="popular Movies" icon="/public/like.svg" path="/MoviesPage" />
       {isLoading ? (
         <div className="flex justify-center items-center h-64 text-red-500 text-xl font-medium animate-pulse">
           Loading blockbuster movies...

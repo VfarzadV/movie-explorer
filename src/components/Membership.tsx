@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const membershipPlans = [
     {
         id: 1,
@@ -39,7 +40,7 @@ const membershipPlans = [
 
 export default function Membership() {
     return (
-        <div className="flex flex-col py-20 w-[85%] mx-auto">
+        <div className="flex flex-col py-10 w-[85%] mx-auto">
             <div className="mb-10">
                 <div className="flex items-center gap-3 mb-4">
                     <img src="/video-horizontal.svg" alt="Membership" className="w-7 h-7" />
@@ -70,9 +71,9 @@ export default function Membership() {
                             <span className="text-4xl font-bold text-white">${plan.price}</span>
                             <span className="text-gray-500 text-sm">/month</span>
                         </div>
-                        <button className="w-full cursor-pointer text-white font-medium py-3.5 rounded-md transition-colors bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700">
+                        <Link to="/Subscriptions" className="w-full flex items-center justify-center cursor-pointer text-white font-medium py-3.5 rounded-md transition-colors bg-linear-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700">
                             Choose Plan
-                        </button>
+                        </Link>
                     </div>
                 ))}
             </div>

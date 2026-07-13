@@ -12,7 +12,7 @@ const footerLinks = [
     {
         title: "Movies",
         links: [
-            { name: "Genres", path: "/movies" },
+            { name: "Genres", path: "/genre" },
             { name: "Trending", path: "/movies" },
             { name: "New Release", path: "/movies" },
             { name: "Popular", path: "/movies" }
@@ -21,10 +21,10 @@ const footerLinks = [
     {
         title: "Shows",
         links: [
-            { name: "Genres", path: "/shows" },
-            { name: "Trending", path: "/shows" },
-            { name: "New Release", path: "/shows" },
-            { name: "Popular", path: "/shows" }
+            { name: "Genres", path: "/genre" },
+            { name: "Trending", path: "/series" },
+            { name: "New Release", path: "/series" },
+            { name: "Popular", path: "/series" }
         ]
     },
     {
