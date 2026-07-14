@@ -13,7 +13,7 @@ export default function MoviesBox({ movies = [], mediaType = "movie" }: MoviesBo
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-6">
                 {movies.map((movie) => (
                     <Link
-                        to={`/${mediaType === "series" ? "series" : "movie"}/${movie.id}`}
+                        to={`/${movie.media_type || mediaType}/${movie.id}`}
                         key={movie.id}
                         className="group cursor-pointer flex flex-col gap-3 p-3 bg-[#111111] border border-[#222222] rounded-2xl shadow-lg shadow-black/50 hover:shadow-black/80 hover:border-gray-600 hover:-translate-y-1 transition-all duration-300"
                     >
@@ -23,11 +23,16 @@ export default function MoviesBox({ movies = [], mediaType = "movie" }: MoviesBo
                                 alt={movie.title}
                                 className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                             />
-                            <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-gray-300 text-[10px] px-2 py-1 rounded-md">
+                            <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-gray-300 text-[10px] px-2 py-1 rounded-md z-10">
                                 {movie.genre_ids && movie.genre_ids.length > 0
                                     ? movie.genre_ids.slice(0, 2).map(id => genreMap[id]).join(" • ")
                                     : movie.genre}
                             </div>
+                            {(movie.media_type || mediaType) && (
+                                <div className="absolute top-2 left-2 bg-[#CC0000]/90 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded-md font-bold shadow-md shadow-black/50 z-10">
+                                    {(movie.media_type || mediaType) === "series" ? "series" : "Movie"}
+                                </div>
+                            )}
                         </div>
                         <div className="flex flex-col px-1">
                             <div className="flex justify-between items-start gap-2">

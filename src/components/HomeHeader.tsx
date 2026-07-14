@@ -6,7 +6,7 @@ import { apiEndpoints, BACKDROP_BASE_URL, IMAGE_BASE_URL } from '../services/tmd
 
 export default function HomeHeader() {
   const [trendingMovies, setTrendingMovies] = useState<TMDBMovie[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     fetch(apiEndpoints.trending)
@@ -24,11 +24,9 @@ export default function HomeHeader() {
 
   useEffect(() => {
     if (trendingMovies.length === 0) return;
-
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % trendingMovies.length);
     }, 5000);
-
     return () => clearInterval(timer);
   }, [trendingMovies.length]);
 
@@ -41,28 +39,26 @@ export default function HomeHeader() {
   };
 
   const currentMovie = trendingMovies[currentIndex];
-
   const prevIndex = (currentIndex - 1 + trendingMovies.length) % trendingMovies.length;
   const nextIndex = (currentIndex + 1) % trendingMovies.length;
-
   const prevMovie = trendingMovies[prevIndex];
   const nextMovie = trendingMovies[nextIndex];
 
-  const headerStyle = currentMovie?.backdrop_path
-    ? { backgroundImage: `url('${BACKDROP_BASE_URL}${currentMovie.backdrop_path}')` }
-    : { backgroundColor: '#111111' };
-
   return (
-    <div
-      className="w-full h-250 bg-cover bg-center bg-no-repeat relative transition-all duration-1000"
-      style={headerStyle}
-    >
-      <div className="absolute inset-0 bg-linear-to-t from-[#0A0A0A] via-black/60 to-black/20"></div>
-
+    <div className="w-full h-250 bg-[#111111] relative overflow-hidden">
+      {trendingMovies.map((movie, index) => (
+        <div
+          key={movie.id}
+          className={`absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100 z-0" : "opacity-0 -z-10"
+            }`}
+          style={{
+            backgroundImage: `url('${BACKDROP_BASE_URL}${movie.backdrop_path}')`
+          }}
+        />
+      ))}
+      <div className="absolute inset-0 bg-linear-to-t from-[#0A0A0A] via-black/60 to-black/20 z-0"></div>
       <div className="relative z-10 h-full flex flex-col">
         <Navbar />
-
-        {/* تغییرات در این بخش اعمال شد */}
         {currentMovie && (
           <HomeHeaderTitle
             id={currentMovie.id}
@@ -71,9 +67,10 @@ export default function HomeHeader() {
             onNext={handleNext}
             onPrev={handlePrev}
             prevImage={prevMovie?.poster_path ? `${IMAGE_BASE_URL}${prevMovie.poster_path}` : null}
-            nextImage={nextMovie?.poster_path ? `${IMAGE_BASE_URL}${nextMovie.poster_path}` : null} />
+            nextImage={nextMovie?.poster_path ? `${IMAGE_BASE_URL}${nextMovie.poster_path}` : null}
+          />
         )}
       </div>
     </div>
-  )
+  );
 }

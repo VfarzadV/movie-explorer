@@ -17,6 +17,7 @@ export interface MovieType {
   rating: string;
   releaseDate: string;
   description: string;
+  media_type?: "movie" | "series";
 }
 export interface TMDBMovie {
   id: number;
@@ -100,4 +101,31 @@ export interface TMDBVideo {
     site: string;
     type: string;
     key: string;
+}
+export interface TMDBMultiSearchResult {
+  id: number;
+  media_type: string;
+  poster_path?: string | null;
+  title?: string;
+  name?: string;
+}
+export interface TMDBReview {
+  id: string;
+  author: string;
+  content: string;
+  created_at: string;
+  author_details: {
+    name: string;
+    username: string;
+    avatar_path: string | null;
+    rating: number | null;
+  };
+}
+export interface UnifiedReview {
+    id: string | number;
+    name: string;
+    text: string;
+    date: string;
+    rating: number;
+    avatar?: string;
 }

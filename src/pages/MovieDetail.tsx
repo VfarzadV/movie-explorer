@@ -1,6 +1,6 @@
 import Footer from "../components/Footer"
 import MovieDetailDescription from "../components/MovieDetailDescription"
-import Comments from "../components/Comments"
+import CommentsSection from "../components/CommentsSection";
 import RelatedMovies from "../components/RelatedMovies"
 import { useParams } from "react-router-dom";
 
@@ -9,7 +9,7 @@ export default function MovieDetail() {
     return (
         <div className="font-martel bg-linear-to-b from-[#191919] to-[#0A0A0A] ">
             <MovieDetailDescription />
-            <Comments />
+            <CommentsSection mediaType="movie" id={id!} />
             <RelatedMovies id={id as string} mediaType="movie" />
             <Footer />
         </div>

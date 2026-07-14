@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams , useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import Footer from "../components/Footer";
-import Comments from "../components/Comments";
+import CommentsSection from "../components/CommentsSection";
 import RelatedMovies from "../components/RelatedMovies";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { apiEndpoints, BACKDROP_BASE_URL, IMAGE_BASE_URL } from '../services/tmdb';
 import type { TMDBTvDetails } from "../types";
+import { PlayIcon, PlusIcon } from "@heroicons/react/24/solid";
 
 export default function SeriesDetail() {
     const { id } = useParams();
@@ -66,7 +67,6 @@ export default function SeriesDetail() {
                         <div className='w-full md:w-3/4 lg:w-4/5'>
                             <div className='flex flex-col md:flex-row md:items-center justify-between gap-6'>
                                 <div className='flex items-baseline text-[#D2D2D2] gap-3'>
-
                                     <h3 className='font-bold text-4xl md:text-5xl text-white'>{show.name}</h3>
                                     <span className="text-xl">({releaseYear})</span>
                                 </div>
@@ -84,11 +84,19 @@ export default function SeriesDetail() {
                             <p className='text-gray-300 text-lg mt-6 max-w-4xl leading-relaxed'>
                                 {show.overview}
                             </p>
+                            <div className='flex flex-wrap items-center gap-4 mt-10'>
+                                <Link to={`/trailer/series/${id}`} className='bg-[#CC0000] rounded-full flex align-middle items-center justify-center py-3.5 px-6 gap-2 text-center shadow-lg shadow-red-600/40 hover:shadow-red-600/60 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer font-medium text-white'>
+                                    <PlayIcon className='w-6 h-6' /> Watch Now
+                                </Link>
+                                <button type="button" className='bg-[#1A1A1A] border border-gray-700 text-white rounded-full flex align-middle items-center py-3.5 px-6 gap-2 text-center shadow-lg hover:bg-gray-800 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer font-medium'>
+                                    <PlusIcon className='w-6 h-6' /> WatchList
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <Comments />
+            <CommentsSection mediaType="series" id={id!} />
             <RelatedMovies id={id as string} mediaType="series" />
             <Footer />
         </div>

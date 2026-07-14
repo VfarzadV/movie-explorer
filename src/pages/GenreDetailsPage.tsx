@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import MoviesBox from "../components/MoviesBox";
 import { apiEndpoints, IMAGE_BASE_URL } from "../services/tmdb";
 import { genreMap } from "../services/genres";
-import type { MovieType, TMDBMovie } from "../types";
+import type { MovieType, TMDBMovie, TMDBShow } from "../types"; // TMDBShow اضافه شد
 import Pagination from "rc-pagination";
 
 export default function GenreDetailsPage() {
@@ -19,13 +19,16 @@ export default function GenreDetailsPage() {
 
     useEffect(() => {
         if (!id) return;
-        const fetchGenreMovies = () => {
+        const fetchGenreData = () => {
             setIsLoading(true);
-            fetch(apiEndpoints.discoverMoviesByGenre(id, currentPage))
-                .then(res => res.json())
-                .then(data => {
-                    setTotalPages(data.total_pages > 500 ? 500 : data.total_pages);
-                    const formattedMovies: MovieType[] = data.results.map((item: TMDBMovie) => ({
+            Promise.all([
+                fetch(apiEndpoints.discoverMoviesByGenre(id, currentPage)).then(res => res.json()),
+                fetch(apiEndpoints.discoverSeriesByGenre(id, currentPage)).then(res => res.json())
+            ])
+                .then(([moviesData, seriesData]) => {
+                    const maxPages = Math.max(moviesData.total_pages || 1, seriesData.total_pages || 1);
+                    setTotalPages(maxPages > 500 ? 500 : maxPages);
+                    const formattedMovies: MovieType[] = (moviesData.results || []).map((item: TMDBMovie) => ({
                         id: item.id,
                         title: item.title,
                         image: item.poster_path ? `${IMAGE_BASE_URL}${item.poster_path}` : "",
@@ -34,19 +37,35 @@ export default function GenreDetailsPage() {
                         rating: item.vote_average?.toFixed(1) || "N/A",
                         releaseDate: item.release_date || "Unknown",
                         description: item.overview || "No description available.",
+                        media_type: "movie"
                     }));
-                    setMovies(formattedMovies);
+                    const formattedSeries: MovieType[] = (seriesData.results || []).map((item: TMDBShow) => ({
+                        id: item.id,
+                        title: item.name,
+                        image: item.poster_path ? `${IMAGE_BASE_URL}${item.poster_path}` : "",
+                        genre: genreName,
+                        genre_ids: item.genre_ids,
+                        rating: item.vote_average?.toFixed(1) || "N/A",
+                        releaseDate: item.first_air_date || "Unknown",
+                        description: item.overview || "No description available.",
+                        media_type: "series"
+                    }));
+                    const combined = [...formattedMovies, ...formattedSeries].sort(
+                        (a, b) => parseFloat(b.rating) - parseFloat(a.rating)
+                    );
+                    setMovies(combined);
                 })
-                .catch(err => console.error("Error fetching genre movies:", err))
+                .catch(err => console.error("Error fetching genre data:", err))
                 .finally(() => setIsLoading(false));
         };
-        fetchGenreMovies();
+        fetchGenreData();
     }, [id, genreName, currentPage]);
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
     const renderPaginationItem = (current: number, type: string, element: React.ReactNode) => {
         if (type === 'page') {
             return (
@@ -84,12 +103,12 @@ export default function GenreDetailsPage() {
             <div className="w-[85%] mx-auto flex flex-col mt-20 flex-1">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                        Best of <span className="text-[#CC0000]">{genreName}</span> Movies
+                        Best of <span className="text-[#CC0000]">{genreName}</span>
                     </h1>
                 </div>
                 {isLoading ? (
                     <div className="text-center text-red-500 py-20 text-xl animate-pulse">
-                        Loading {genreName} movies...
+                        Loading {genreName} collection...
                     </div>
                 ) : (
                     <MoviesBox movies={movies} />

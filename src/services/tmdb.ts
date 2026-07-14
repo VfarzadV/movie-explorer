@@ -15,6 +15,8 @@ export const apiEndpoints = {
     `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=credits`,
   discoverMoviesByGenre: (genreId: string | number, page: number = 1) =>
     `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=${genreId}&page=${page}`,
+  discoverSeriesByGenre: (genreId: string | number, page: number = 1) =>
+    `${BASE_URL}/discover/tv?api_key=${API_KEY}&language=en-US&with_genres=${genreId}&page=${page}`,
   popularSeries: (page: number) =>
     `${BASE_URL}/tv/popular?api_key=${API_KEY}&language=en-US&page=${page}`,
   searchSeries: (query: string, page: number) =>
@@ -31,4 +33,10 @@ export const apiEndpoints = {
     `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=en-US`,
   seriesVideos: (id: string | number) =>
     `${BASE_URL}/tv/${id}/videos?api_key=${API_KEY}&language=en-US`,
+  searchMulti: (query: string, page: number = 1) =>
+    `${BASE_URL}/search/multi?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=${page}`,
+  movieReviews: (id: string | number) =>
+    `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
+  seriesReviews: (id: string | number) =>
+    `${BASE_URL}/tv/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
 };
