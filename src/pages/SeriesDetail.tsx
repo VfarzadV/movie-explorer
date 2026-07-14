@@ -6,14 +6,16 @@ import CommentsSection from "../components/CommentsSection";
 import RelatedMovies from "../components/RelatedMovies";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { apiEndpoints, BACKDROP_BASE_URL, IMAGE_BASE_URL } from '../services/tmdb';
-import type { TMDBTvDetails } from "../types";
-import { PlayIcon, PlusIcon } from "@heroicons/react/24/solid";
+import type { TMDBTvDetails, MovieType } from "../types";
+import { PlayIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
+import { useWatchlist } from '../context/WatchlistContext';
 
 export default function SeriesDetail() {
     const { id } = useParams();
     const [show, setShow] = useState<TMDBTvDetails | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const { toggleWatchlist, isInWatchlist } = useWatchlist();
 
     useEffect(() => {
         if (!id) return;
@@ -45,6 +47,20 @@ export default function SeriesDetail() {
     const backgroundStyle = show.backdrop_path
         ? { backgroundImage: `url('${BACKDROP_BASE_URL}${show.backdrop_path}')` }
         : { backgroundColor: '#111111' };
+    const handleWatchlist = () => {
+        const watchlistItem: MovieType = {
+            id: Number(id),
+            title: show.name,
+            image: show.poster_path ? `${IMAGE_BASE_URL}${show.poster_path}` : "/placeholder.jpg",
+            genre: "TV Show",
+            rating: show.vote_average?.toFixed(1) || "N/A",
+            releaseDate: show.first_air_date || "Unknown",
+            description: show.overview,
+            media_type: "series"
+        };
+        toggleWatchlist(watchlistItem);
+    };
+    const inWatchlist = isInWatchlist(Number(id));
 
     return (
         <div className="font-martel bg-linear-to-b from-[#191919] to-[#0A0A0A]">
@@ -88,8 +104,13 @@ export default function SeriesDetail() {
                                 <Link to={`/trailer/series/${id}`} className='bg-[#CC0000] rounded-full flex align-middle items-center justify-center py-3.5 px-6 gap-2 text-center shadow-lg shadow-red-600/40 hover:shadow-red-600/60 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer font-medium text-white'>
                                     <PlayIcon className='w-6 h-6' /> Watch Now
                                 </Link>
-                                <button type="button" className='bg-[#1A1A1A] border border-gray-700 text-white rounded-full flex align-middle items-center py-3.5 px-6 gap-2 text-center shadow-lg hover:bg-gray-800 hover:-translate-y-1 active:scale-95 transition-all duration-300 cursor-pointer font-medium'>
-                                    <PlusIcon className='w-6 h-6' /> WatchList
+                                <button
+                                    onClick={handleWatchlist}
+                                    type="button"
+                                    className={`border rounded-full flex align-middle items-center py-3.5 px-6 gap-2 text-center shadow-lg transition-all duration-300 cursor-pointer font-medium ${inWatchlist ? 'bg-red-600 border-red-600 text-white hover:bg-red-700' : 'bg-[#1A1A1A] border-gray-700 text-white hover:bg-gray-800 hover:-translate-y-1'}`}
+                                >
+                                    {inWatchlist ? <CheckIcon className='w-6 h-6' /> : <PlusIcon className='w-6 h-6' />}
+                                    {inWatchlist ? 'In Watchlist' : 'WatchList'}
                                 </button>
                             </div>
                         </div>

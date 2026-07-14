@@ -11,6 +11,8 @@ import Series from "./pages/Series";
 import SeriesDetail from "./pages/SeriesDetail";
 import AnimePage from "./pages/AnimePage";
 import TrailerPage from "./pages/TrailerPage";
+import WatchlistPage from "./pages/WatchlistPage";
+
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -25,7 +27,8 @@ const routes = [
   { path: "/series", element: <Series /> },
   { path: "/series/:id", element: <SeriesDetail /> },
   { path: "/anime", element: <AnimePage /> },
-  { path: "/trailer/:mediaType/:id", element: <TrailerPage /> }
+  { path: "/trailer/:mediaType/:id", element: <TrailerPage /> },
+  { path: "/watchlist", element: <WatchlistPage /> },
 ];
 
 export default routes;

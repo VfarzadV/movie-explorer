@@ -37,7 +37,6 @@ export default function Trending() {
             });
     }, []);
 
-
     return (
         <div className="flex flex-col  py-10 w-[85%] mx-auto ">
             <HomeSectionTitle title="Trending Movies" icon="/public/star.svg" path="/MoviesPage" />

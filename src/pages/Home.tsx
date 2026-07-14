@@ -9,7 +9,6 @@ import Footer from "../components/Footer"
 export default function Home() {
   return (
     <div className="font-martel bg-linear-to-b from-[#191919] to-[#0A0A0A] ">
-
       <HomeHeader />
       <Genres />
       <Trending />

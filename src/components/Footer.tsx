@@ -46,9 +46,7 @@ export default function Footer() {
     return (
         <footer className="bg-[#0A0A0A] pt-16 pb-8 mt-20">
             <div className="w-[85%] mx-auto">
-                
                 <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-16">
-                    
                     {footerLinks.map((column, index) => (
                         <div key={index} className="flex flex-col gap-4">
                             <h3 className="text-white font-medium text-lg mb-2">
@@ -65,7 +63,6 @@ export default function Footer() {
                             </ul>
                         </div>
                     ))}
-                    
                     <div className="flex flex-col gap-4">
                         <h3 className="text-white font-medium text-lg mb-2">
                             Connect With Us
@@ -79,14 +76,10 @@ export default function Footer() {
                             </button>
                         </div>
                     </div>
-                    
                 </div>
-                
                 <div className="w-full h-px bg-gray-800 mb-8"></div>
-                
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
                     <p>@2024, All Rights Reserved</p>
-                    
                     <div className="flex items-center gap-6">
                         <Link to="/terms" className="hover:text-white transition-colors">
                             Terms of Use
@@ -99,7 +92,6 @@ export default function Footer() {
                         </Link>
                     </div>
                 </div>
-                
             </div>
         </footer>
     );

@@ -137,7 +137,7 @@ export default function Series() {
                         pageSize={20}
                         onChange={handlePageChange}
                         itemRender={renderPaginationItem}
-                        className="flex items-center justify-center gap-2 mt-16 mb-10 list-none p-0"
+                        className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-10 md:mt-16 mb-10 list-none p-0 px-2"
                     />
                 )}
             </div>

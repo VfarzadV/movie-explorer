@@ -34,7 +34,6 @@ export default function RelatedMovies({ id, mediaType = "movie" }: RelatedProps)
                 .catch(err => console.error("Error fetching related:", err))
                 .finally(() => setIsLoading(false));
         };
-
         fetchRelated();
     }, [id, mediaType]);
 
@@ -47,13 +46,12 @@ export default function RelatedMovies({ id, mediaType = "movie" }: RelatedProps)
                 icon="/video-horizontal.svg"
                 path={mediaType === "movie" ? "/MoviesPage" : "/series"}
             />
-
             {isLoading ? (
                 <div className="flex justify-center items-center h-64 text-red-500 text-xl font-medium animate-pulse">
                     Finding recommendations...
                 </div>
             ) : (
-                <MoviesBox movies={movies} mediaType={mediaType} /> 
+                <MoviesBox movies={movies} mediaType={mediaType} />
             )}
         </div>
     );

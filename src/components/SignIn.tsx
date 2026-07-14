@@ -1,32 +1,29 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useAuth } from "../context/AuthContext"; 
+import { useAuth } from "../context/AuthContext";
 
 export default function SignIn() {
     const navigate = useNavigate();
-    const { login } = useAuth(); 
-
+    const { login } = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const userLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (username.trim().length >= 5 && password.trim().length >= 8) {
-            
             login({
                 name: username,
                 email: `${username}@example.com`,
                 password: password
             });
-
             await Swal.fire({
                 title: "Welcome!",
                 text: `${username} Welcome to our site. enjoy!!!`,
                 icon: "success",
                 confirmButtonText: "go to site",
-                confirmButtonColor: "#CC0000", 
-                background: "#111111", 
+                confirmButtonColor: "#CC0000",
+                background: "#111111",
                 color: "#ffffff",
                 timer: 3000,
                 backdrop: true,

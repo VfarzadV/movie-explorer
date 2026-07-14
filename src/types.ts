@@ -30,6 +30,7 @@ export interface TMDBMovie {
   genre_ids: number[];
 }
 export interface HomeHeaderTitleProps {
+  movie: TMDBMovie;
   id: number;
   title: string;
   overview: string;
@@ -81,26 +82,26 @@ export interface TMDBShow {
   genre_ids: number[];
 }
 export interface TMDBTvDetails {
-    backdrop_path: string | null;
-    poster_path: string | null;
-    name: string;
-    first_air_date: string;
-    vote_count: number;
-    vote_average: number;
-    number_of_seasons: number;
-    overview: string;
-    genres: { id: number; name: string }[];
-    credits?: { cast: { name: string }[] };
-    success?: boolean;
+  backdrop_path: string | null;
+  poster_path: string | null;
+  name: string;
+  first_air_date: string;
+  vote_count: number;
+  vote_average: number;
+  number_of_seasons: number;
+  overview: string;
+  genres: { id: number; name: string }[];
+  credits?: { cast: { name: string }[] };
+  success?: boolean;
 }
 export interface RelatedProps {
-    id: string | number;
-    mediaType?: "movie" | "series"; 
+  id: string | number;
+  mediaType?: "movie" | "series";
 }
 export interface TMDBVideo {
-    site: string;
-    type: string;
-    key: string;
+  site: string;
+  type: string;
+  key: string;
 }
 export interface TMDBMultiSearchResult {
   id: number;
@@ -122,10 +123,10 @@ export interface TMDBReview {
   };
 }
 export interface UnifiedReview {
-    id: string | number;
-    name: string;
-    text: string;
-    date: string;
-    rating: number;
-    avatar?: string;
+  id: string | number;
+  name: string;
+  text: string;
+  date: string;
+  rating: number;
+  avatar?: string;
 }

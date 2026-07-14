@@ -20,7 +20,6 @@ export default function TrailerPage() {
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
-                    
                     const trailer = data.results?.find(
                         (vid: TMDBVideo) => vid.site === "YouTube" && vid.type === "Trailer"
                     );
@@ -32,7 +31,6 @@ export default function TrailerPage() {
                 .catch(err => console.error("Error fetching trailer:", err))
                 .finally(() => setIsLoading(false));
         };
-
         fetchVideos();
     }, [id, mediaType]);
 

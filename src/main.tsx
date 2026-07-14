@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { AuthProvider } from './context/AuthContext.tsx'
+import { WatchlistProvider } from './context/WatchlistContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthProvider>
-      <App />
+      <WatchlistProvider>
+        <App />
+      </WatchlistProvider>
     </AuthProvider>
   </StrictMode>,
 )

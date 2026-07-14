@@ -5,7 +5,6 @@ export default function Genres() {
     <div className="flex flex-col  py-20 w-[85%] mx-auto ">
       <HomeSectionTitle title="Genres" icon="/public/Genres.svg" path="/genre" />
       <GenresBox />
-
     </div>
   )
 }

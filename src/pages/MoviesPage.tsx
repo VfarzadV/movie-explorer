@@ -65,8 +65,8 @@ export default function MoviesPage() {
         if (type === 'page') {
             return (
                 <button className={`w-10 h-10 flex items-center justify-center rounded-md text-sm font-medium transition-colors cursor-pointer ${currentPage === current
-                        ? "bg-[#CC0000] text-white border border-[#CC0000]"
-                        : "bg-[#111111] text-gray-400 border border-gray-800 hover:border-gray-500 hover:text-white"
+                    ? "bg-[#CC0000] text-white border border-[#CC0000]"
+                    : "bg-[#111111] text-gray-400 border border-gray-800 hover:border-gray-500 hover:text-white"
                     }`}>
                     {current}
                 </button>
@@ -95,7 +95,6 @@ export default function MoviesPage() {
     return (
         <div className="font-martel bg-linear-to-b from-[#191919] to-[#0A0A0A] min-h-screen flex flex-col">
             <Navbar />
-
             <div className="w-[85%] mx-auto flex flex-col items-center mt-20 flex-1">
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">
                     Your Gateway to Movie <span className="text-[#CC0000]">Magic</span>
@@ -103,7 +102,6 @@ export default function MoviesPage() {
                 <p className="text-gray-400 text-sm md:text-base text-center max-w-2xl mb-10 leading-relaxed">
                     Dive into the world of cinema with MovieWatch, where you can search and find everything you want to watch.
                 </p>
-
                 <div className="w-full max-w-3xl mb-12 relative group">
                     <div className="flex items-center w-full bg-[#111111] border border-gray-800 rounded-lg overflow-hidden transition-colors focus-within:border-red-600 shadow-lg">
                         <input
@@ -118,7 +116,6 @@ export default function MoviesPage() {
                         </button>
                     </div>
                 </div>
-
                 <div className="w-full">
                     {isLoading ? (
                         <div className="text-center text-red-500 py-20 text-xl animate-pulse">
@@ -132,7 +129,6 @@ export default function MoviesPage() {
                         </div>
                     )}
                 </div>
-
                 {!isLoading && totalPages > 1 && (
                     <Pagination
                         current={currentPage}
@@ -140,11 +136,10 @@ export default function MoviesPage() {
                         pageSize={20}
                         onChange={handlePageChange}
                         itemRender={renderPaginationItem}
-                        className="flex items-center justify-center gap-2 mt-16 mb-10 list-none p-0"
+                        className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-10 md:mt-16 mb-10 list-none p-0 px-2"
                     />
                 )}
             </div>
-
             <Footer />
         </div>
     );

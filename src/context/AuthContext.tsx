@@ -2,12 +2,9 @@
 import { createContext, useState, useContext, type ReactNode } from 'react';
 import type { User, AuthContextType } from "../types";
 
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-    
-    
     const [user, setUser] = useState<User | null>(() => {
         const savedUser = localStorage.getItem('movieWatchUser');
         if (savedUser) {

@@ -45,31 +45,37 @@ export default function HomeHeader() {
   const nextMovie = trendingMovies[nextIndex];
 
   return (
-    <div className="w-full h-250 bg-[#111111] relative overflow-hidden">
+    <div className="w-full min-h-screen xl:min-h-0 xl:h-212.5 bg-[#111111] relative overflow-hidden flex flex-col">
       {trendingMovies.map((movie, index) => (
         <div
           key={movie.id}
-          className={`absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100 z-0" : "opacity-0 -z-10"
+          className={`absolute inset-0 w-full h-full bg-cover bg-top xl:bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100 z-0" : "opacity-0 -z-10"
             }`}
           style={{
             backgroundImage: `url('${BACKDROP_BASE_URL}${movie.backdrop_path}')`
           }}
         />
       ))}
-      <div className="absolute inset-0 bg-linear-to-t from-[#0A0A0A] via-black/60 to-black/20 z-0"></div>
-      <div className="relative z-10 h-full flex flex-col">
+      
+      <div className="absolute inset-0 bg-linear-to-t from-[#0A0A0A] via-[#0A0A0A]/90 xl:via-black/60 to-black/50 xl:to-black/20 z-0"></div>
+      
+      <div className="relative z-10 w-full h-full flex flex-col pb-10 xl:pb-0">
         <Navbar />
-        {currentMovie && (
-          <HomeHeaderTitle
-            id={currentMovie.id}
-            title={currentMovie.title}
-            overview={currentMovie.overview}
-            onNext={handleNext}
-            onPrev={handlePrev}
-            prevImage={prevMovie?.poster_path ? `${IMAGE_BASE_URL}${prevMovie.poster_path}` : null}
-            nextImage={nextMovie?.poster_path ? `${IMAGE_BASE_URL}${nextMovie.poster_path}` : null}
-          />
-        )}
+        
+        <div className="flex-1 flex items-center justify-center w-full h-full">
+          {currentMovie && (
+            <HomeHeaderTitle
+              movie={currentMovie}
+              id={currentMovie.id}
+              title={currentMovie.title}
+              overview={currentMovie.overview}
+              onNext={handleNext}
+              onPrev={handlePrev}
+              prevImage={prevMovie?.poster_path ? `${IMAGE_BASE_URL}${prevMovie.poster_path}` : null}
+              nextImage={nextMovie?.poster_path ? `${IMAGE_BASE_URL}${nextMovie.poster_path}` : null}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

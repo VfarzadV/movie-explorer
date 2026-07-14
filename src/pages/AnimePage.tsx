@@ -21,7 +21,6 @@ export default function AnimePage() {
                     return res.json();
                 })
                 .then((data) => {
-                    
                     setTotalPages(data.total_pages > 500 ? 500 : data.total_pages);
                     const formattedAnime: MovieType[] = data.results.map((show: TMDBShow) => ({
                         id: show.id,
@@ -106,7 +105,7 @@ export default function AnimePage() {
                         pageSize={20}
                         onChange={handlePageChange}
                         itemRender={renderPaginationItem}
-                        className="flex items-center justify-center gap-2 mt-16 mb-10 list-none p-0"
+                        className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-10 md:mt-16 mb-10 list-none p-0 px-2"
                     />
                 )}
             </div>
