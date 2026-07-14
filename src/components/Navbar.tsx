@@ -136,7 +136,7 @@ export default function Navbar() {
         )}
       </div>
       {isMenuOpen && (
-        <div className="absolute top-[100%] left-0 w-full bg-[#0F0F0F] border border-[#1F1F1F] rounded-lg mt-2 flex flex-col p-4 shadow-2xl xl:hidden z-50">
+        <div className="absolute top-full left-0 w-full bg-[#0F0F0F] border border-[#1F1F1F] rounded-lg mt-2 flex flex-col p-4 shadow-2xl xl:hidden z-50">
           {navLinks.map((link) => (
             <Link
               key={link.name}
