@@ -39,7 +39,7 @@ export default function Trending() {
 
     return (
         <div className="flex flex-col  py-10 w-[85%] mx-auto ">
-            <HomeSectionTitle title="Trending Movies" icon="/public/star.svg" path="/MoviesPage" />
+            <HomeSectionTitle title="Trending Movies" icon="/star.svg" path="/MoviesPage" />
             {isLoading ? (
                 <div className="flex justify-center items-center h-64 text-red-500 text-xl font-medium animate-pulse">
                     Loading blockbuster movies...
