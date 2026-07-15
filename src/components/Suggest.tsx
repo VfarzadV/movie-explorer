@@ -40,7 +40,7 @@ export default function Suggest() {
   }, []);
   return (
     <div className="flex flex-col  py-10 w-[85%] mx-auto ">
-      <HomeSectionTitle title="popular Movies" icon="/public/like.svg" path="/MoviesPage" />
+      <HomeSectionTitle title="popular Movies" icon="/like.svg" path="/MoviesPage" />
       {isLoading ? (
         <div className="flex justify-center items-center h-64 text-red-500 text-xl font-medium animate-pulse">
           Loading blockbuster movies...
