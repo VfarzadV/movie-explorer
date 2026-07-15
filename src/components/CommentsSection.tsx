@@ -83,7 +83,7 @@ export default function CommentsSection({ mediaType, id }: CommentsSectionProps)
 
         const newReviewObj: UnifiedReview = {
             id: Date.now(),
-            name: "Farhad Vatandoust",
+            name: "Farzad Vatandoust",
             text: newComment,
             date: today,
             rating: rating,
