@@ -13,7 +13,7 @@
   [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](#)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](#)
 
-  ### 🚀 [**Live Demo: Experience MovieWatch**](https://[Your-Vercel-Live-Link-Here])
+  ### 🚀 [**Live Demo: Experience MovieWatch**](https://movie-explorer-three-plum.vercel.app/)
 </div>
 
 ---
