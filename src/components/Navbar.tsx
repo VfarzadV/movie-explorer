@@ -55,7 +55,7 @@ export default function Navbar() {
         >
           {isMenuOpen ? <XMarkIcon className="w-7 h-7" /> : <Bars3Icon className="w-7 h-7" />}
         </button>
-        <img src="/public/Logo.svg" alt="Logo" className="w-10 h-10 md:w-14 md:h-14" />
+        <img src="/Logo.svg" alt="Logo" className="w-10 h-10 md:w-14 md:h-14" />
       </div>
       <ul className="hidden xl:flex gap-6 bg-[#0F0F0F] px-6 py-3 rounded-lg border-2 border-[#1F1F1F] text-white justify-center">
         {navLinks.map((link) => (
