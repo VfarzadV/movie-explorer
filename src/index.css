@@ -4,4 +4,12 @@
   --color-dark-main: #1E1E1E;
   
   --font-martel: "Martel", serif;
+
+  --font-sans: "Martel", sans-serif;
+}
+
+@layer base {
+  html, body {
+    font-family: "Martel", serif !important;
+  }
 }
